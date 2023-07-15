@@ -106,13 +106,6 @@
       font-size: 16px;
       margin: 8px 0;
     }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .catalog {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      }
-    }
   </style>
 </head>
 <body>
@@ -153,3 +146,59 @@
 
       <div class="product" data-category="books">
         <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 1</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: John Doe</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+      
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+
+
+      <!-- Add more products -->
+    </div>
+
+    <script>
+      function filterProducts(category) {
+        const products = document.querySelectorAll('.product');
+
+        products.forEach(product => {
+          const productCategory = product.getAttribute('data-category');
+
+          if (category === 'all' || productCategory === category) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </div>
+
+</body>
+</html>
