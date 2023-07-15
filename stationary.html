@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forever Stationary & Xerox</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background-color: #333;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .navigation {
+      display: flex;
+    }
+
+    .navigation a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navigation a:hover {
+      color: #ddd;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .category {
+      margin: 0 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background-color: #333;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .category:hover {
+      background-color: #555;
+    }
+
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 20px;
+      justify-items: center;
+    }
+
+    .product {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: transform 0.3s;
+      border-radius: 8px;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .product h1 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .product p {
+      color: grey;
+      font-size: 16px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <a class="logo" href="#">Forever Stationary & Xerox</a>
+      <nav class="navigation">
+        <a href="#products">Products</a>
+        <a href="offers.html">Discounts & Offers</a>
+        <a href="contactus.html">Contact</a>
+      </nav>
+    </header>
+
+    <h2 id="products">Product Catalog</h2>
+
+    <div class="categories">
+      <div class="category" onclick="filterProducts('all')">All</div>
+      <div class="category" onclick="filterProducts('pens')">Pens</div>
+      <div class="category" onclick="filterProducts('books')">Notebooks</div>
+      <!-- Add more categories as needed -->
+    </div>
+
+    <div class="catalog">
+      <div class="product" data-category="pens">
+        <img src="https://cdn.thewirecutter.com/wp-content/media/2021/09/pens-2048px-6470.jpg" alt="Pen">
+        <h1>Pen 1</h1>
+        <p class="price">₹ 19.99</p>
+        <p>Available in various colors</p>
+      </div>
+
+      <div class="product" data-category="pens">
+        <img src="https://cdn.thewirecutter.com/wp-content/media/2021/09/pens-2048px-6470.jpg" alt="Pen">
+        <h1>Pen 2</h1>
+        <p class="price">₹ 19.99</p>
+        <p>Available in various colors</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 1</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: John Doe</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+      
+      <div class="product" data-category="books">
+        <img src="https://m.media-amazon.com/images/I/71GZ9ZvNp7L.jpg" alt="Book">
+        <h1>Book 2</h1>
+        <p class="price">₹ 29.99</p>
+        <p>Author: Jane Smith</p>
+      </div>
+
+
+      <!-- Add more products -->
+    </div>
+
+    <script>
+      function filterProducts(category) {
+        const products = document.querySelectorAll('.product');
+
+        products.forEach(product => {
+          const productCategory = product.getAttribute('data-category');
+
+          if (category === 'all' || productCategory === category) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </div>
+
+</body>
+</html>

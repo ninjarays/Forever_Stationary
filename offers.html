@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Coupon Codes - Forever Stationary & Xerox</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background-color: #333;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .navigation {
+      display: flex;
+    }
+
+    .navigation a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 18px;
+      transition: color 0.3s;
+    }
+
+    .navigation a:hover {
+      color: #ddd;
+    }
+
+    .coupon-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .coupon-form {
+      margin-bottom: 20px;
+    }
+
+    .coupon-form label {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .coupon-form input {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 200px;
+    }
+
+    .coupon-form input::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+
+    .coupon-form button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .coupon-form button:hover {
+      opacity: 0.8;
+    }
+
+    .coupon-offer {
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .coupon-offer.active {
+      display: block;
+    }
+
+    .description {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #555;
+      text-align: left;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+  <script>
+    function generateCouponCode() {
+      var name = document.getElementById("name").value;
+      var phoneNumber = document.getElementById("phoneNumber").value;
+      var errorContainer = document.getElementById("errorContainer");
+      var errorText = "";
+
+      if (!name && !phoneNumber) {
+        errorText = "Please enter your name and phone number";
+      } else if (!name) {
+        errorText = "Please enter your name";
+      } else if (!phoneNumber) {
+        errorText = "Please enter your phone number";
+      }
+
+      if (errorText) {
+        errorContainer.textContent = errorText;
+        errorContainer.style.display = "block";
+        return;
+      }
+
+      if (isValidPhoneNumber(phoneNumber)) {
+        var couponCode = generateUniqueCouponCode();
+        document.getElementById("couponCode").textContent = couponCode;
+        document.getElementById("couponOffer").classList.add("active");
+        errorContainer.style.display = "none";
+        storeData(name, phoneNumber); // Call the function to store data in the Google Sheet
+      } else {
+        errorContainer.textContent = "Please enter a valid Indian phone number starting with '+91' or without the country code";
+        errorContainer.style.display = "block";
+      }
+    }
+
+    function generateUniqueCouponCode() {
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      var codeLength = 8;
+      var couponCode = '';
+
+      // Generate a unique coupon code by appending a random character to the existing code
+      for (var i = 0; i < codeLength; i++) {
+        couponCode += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+
+      return couponCode;
+    }
+
+    function isValidPhoneNumber(phoneNumber) {
+      // Regular expression to validate Indian phone number with or without country code '+91'
+      var phoneRegex = /^(\+91)?\d{10}$/;
+      return phoneRegex.test(phoneNumber);
+    }
+
+    function storeData(name, phoneNumber) {
+      var url = "https://script.google.com/macros/s/AKfycbxafR02Unzl7vcEyNdT1OfoAzOinJ_flloO0AYznk_YIHsu4QadYJLt8C4b85UprvcXdw/exec"; // Replace SCRIPT_ID with the actual ID of your Google Apps Script
+      var params = "name=" + encodeURIComponent(name) + "&phoneNumber=" + encodeURIComponent(phoneNumber);
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            console.log("Data stored successfully!");
+          } else {
+            console.log("Error storing data: " + xhr.statusText);
+          }
+        }
+      };
+      xhr.send(params);
+    }
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <a class="logo" href="#">Forever Stationary & Xerox</a>
+      <nav class="navigation">
+        <a href="stationary.html">Home</a>
+      </nav>
+    </header>
+
+    <div class="coupon-container">
+      <h1>Welcome to Forever Stationary & Xerox</h1>
+
+      <div class="description">
+        <p>At Forever Stationary & Xerox, we are excited to announce our grand store opening! <br> <br> As part of our celebration, we are offering a special 10% discount on all our high-quality stationary products.</p>
+        <p>To avail the discount, simply enter your name and phone number below and receive a unique coupon code. This offer is valid until 31st August 2023 and applicable on purchases of ₹60 and above. Hurry, don't miss out on this exclusive offer!</p>
+      </div>
+
+      <div class="coupon-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <br><br>
+        <label for="phoneNumber">Phone number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number (+91xxxxxxxxxx)" required>
+        <span id="errorContainer" class="error"></span>
+        <br><br>
+        <button type="button" onclick="generateCouponCode()">Get Coupon Code</button>
+      </div>
+
+      <div id="couponOffer" class="coupon-offer">
+        <h2>Congratulations!</h2>
+        <div class="description">
+          <p>You have unlocked a 10% discount on all our high-quality stationary products. Present the coupon code below at the time of purchase to avail the discount. This offer is valid until 31st August 2023 and applicable on purchases of ₹60 and above.</p>
+        </div>
+        <h3>Your Coupon Code:</h3>
+        <p id="couponCode"></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
